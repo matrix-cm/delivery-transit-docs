@@ -99,18 +99,18 @@ POST  /api/order/create
 | houseno  | string   | -       | 门牌号          |
 | email    | string   | -       | 电子邮箱        |
 
-| 商品项(Item) |         |      |                          |
-| ------------ | ------- | ---- | ------------------------ |
-| cnname       | string  | *    | 中文名称                 |
-| enname       | string  | *    | 英文名称                 |
-| count        | integer | *    | 数量                     |
-| unit         | string  | -    | 计量单位（默认为‘个’）   |
-| weight       | integer | *    | 单个商品重量，单位克     |
-| delcarevalue | money   | *    | 单个商品申报价格（美元） |
-| origin       | string  | -    | 原产地（默认为CN）       |
-| description  | string  | -    | 描述（英文）             |
-| taxationid   | string  | -    | 税则号                   |
-| sellurl      | string  | -    | 销售链接                 |
+| 商品项(Item)  |         |      |                          |
+| ------------  | ------- | ---- | ------------------------ |
+| cnname        | string  | *    | 中文名称                 |
+| enname        | string  | *    | 英文名称                 |
+| count         | integer | *    | 数量                     |
+| unit          | string  | -    | 计量单位（默认为‘个’）   |
+| weight        | integer | *    | 单个商品重量，单位克     |
+| delcare_value | money   | *    | 单个商品申报价格（美元） |
+| origin        | string  | -    | 原产地（默认为CN）       |
+| description   | string  | -    | 描述（英文）             |
+| taxation_id   | string  | -    | 税则号                   |
+| sell_url      | string  | -    | 销售链接                 |
 
 ###### 返回数据
 
@@ -124,8 +124,7 @@ POST  /api/order/create
 
 #### c. 请求示例
 ```_
-POST http://xxxxxx/api/order/create
-
+POST ${Host}/api/order/create
 content-type: application/json
 channel: C100000
 nonce: e2dd305d79c2ebc8
@@ -217,7 +216,7 @@ sign: oOS98eZJI2KDzoOlfl7Je0XN4gAyrqNG
 
 #### a. 请求方式
 
-GET  /api/trace/{trace_id}
+GET  ${Host}/api/trace/{trace_id}
 
 #### b. 参数说明
 
