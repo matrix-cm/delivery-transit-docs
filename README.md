@@ -124,7 +124,7 @@ POST  /api/order/create
 
 #### c. 请求示例
 ```_
-POST ${Host}/api/order/create
+POST ${Host}/api/order/submit
 content-type: application/json
 channel: C100000
 nonce: e2dd305d79c2ebc8
@@ -286,6 +286,64 @@ sign: oOS98eZJI2KDzoOlfl7Je0XN4gAyrqNG
     "status": 1
   }
 }
+```
+
+### 4. 邮政邮件面单获取
+
+#### a. 请求方式
+
+GET  ${Host}/api/order/pdf/{mailno}
+
+#### b. 参数说明
+
+###### 返回数据
+
+| Response              |         |                     |
+| --------------        | ------- | ------------------- |
+| code                  | int     |                     |
+| success               | boolean |                     |
+| data                  | object  | 返回数据             |
+| data.content          | long    | PDF文件Base64编码    |
+
+#### c. 请求示例
+```_
+GET http://localhost:9090/api/order/pdf/CE000377256CN
+content-type: application/json
+channel: C100000
+nonce: e2dd305d79c2ebc8
+timestamp: 1605165911312
+sign: 2ebe68266d0d32fd8ee9027dd205a1af
+```
+
+#### d. 返回示例
+> 示例中文本长度已缩减
+
+```JSON
+{
+  "code": 0,
+  "success": true,
+  "data": {
+    "content": "JVBERi0xLjQKJeLjz9MKNiAwIG9iago8PC9GaWx0ZXIvRmxhdGVEZWNvZGUvTGVuZ3RoIDU1Pj5zdHJgMTk+PgolaVRleHQtNS4zLjIKc3RhcnR4cmVmCjMyMzc2CiUlRU9GCg=="
+  }
+}
+```
+
+### e.PDF保存本地
+```JAVA
+String targetPath = "/data/pdf/xxxx.pdf";
+// 调用接口获取结果数据
+InnetResult<MailReceipt> innetResult = InnetBusinessManager.getInstance().getReceipt(mailnum);
+// 返回成功则写入文件
+if (innetResult.isSuccess()) {
+	String base64code = innetResult.getData().getContent();
+	Base64.Decoder decoder = Base64.getDecoder();
+	byte[] buffer = decoder.decode(base64code);
+	FileOutputStream out = new FileOutputStream(targetPath);
+	out.write(buffer);
+	out.close();
+	return true;
+}
+return false
 ```
 
 ## 三. 枚举类型
