@@ -47,7 +47,7 @@ MD5(channel=C100001&nonce=z2q4bmke&timestamp=16087271730007a01637f972c4815a84061
 
 #### a. 请求方式
 
-POST  /api/order/create
+POST  /api/order/submit
 
 #### b. 参数说明
 
@@ -118,8 +118,8 @@ POST  /api/order/create
 | --------------   | ------- | ------------------- |
 | code             | int     |                     |
 | data             | object  | 返回数据             |
-| data.order_id    | string  | 订单号               |
-| data.mail_id     | string  | 邮政号               |
+| data.orderno     | string  | 订单号               |
+| data.mailno      | string  | 邮政号               |
 
 
 #### c. 请求示例
@@ -139,8 +139,8 @@ sign: 2ebe68266d0d32fd8ee9027dd205a1af
 {
 	"code": 0,
 	"data": {
-		"order_id": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-		"mail_id": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+		"orderno": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+		"mailno": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 	}
 }
 ```
@@ -158,7 +158,7 @@ POST  /api/trace/submit
 | Parameter        | Type   | Re  | Desc                            |
 | ---------------- | ------ | --- | ------------------------------- |
 | type             | String | *   | 消息类型：  I,U,D                 |
-| mail_num         | String | *   | 邮件号                            |
+| mailno           | String | *   | 邮件号                            |
 | event_time       | String | *   | 事件发生时间:  yyyy-MM-dd HH:mm:ss |
 | event_time_zone  | String | *   | 时区：例如+8                       |
 | event_status     | String | *   | 事件状态                           |
@@ -193,7 +193,7 @@ sign: oOS98eZJI2KDzoOlfl7Je0XN4gAyrqNG
 
 {
   "type": "D",
-  "mail_num": "A1111111",
+  "mailno": "A1111111",
   "event_time": "2020-11-06 22:13:00",
   "event_time_zone": "+8",
   "event_status": "O_111",
@@ -229,8 +229,8 @@ GET  ${Host}/api/trace/{trace_id}
 | data                  | object  | 返回数据             |
 | data.trace_id         | long    | 轨迹数据ID           |
 | data.type             | string  | 消息类型             |
-| data.mail_num         | string  | 邮件号               |
-| data.order_num        | long    | 订单号               |
+| data.mailno           | string  | 邮件号               |
+| data.orderno          | long    | 订单号               |
 | data.event_time       | string  | 事件时间              |
 | data.event_time_zone  | string  | 事件时区              |
 | data.event_status     | string  | 事件状态              |
@@ -265,10 +265,10 @@ sign: oOS98eZJI2KDzoOlfl7Je0XN4gAyrqNG
   "data": {
     "id": 774110505139699712,
     "channel": 100001,
-    "batch_id": 101892,
+    "batchno": 101892,
     "type": "I",
-    "mail_num": "A1111111",
-    "order_num": null,
+    "mailno": "A1111111",
+    "orderno": null,
     "event_time": "2020-11-06 22:13:00 333",
     "event_time_zone": "+8",
     "event_status": "O_111",
