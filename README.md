@@ -296,7 +296,84 @@ sign: oOS98eZJI2KDzoOlfl7Je0XN4gAyrqNG
 }
 ```
 
-### 4. 邮政邮件面单获取
+### 4. 邮政号下轨迹数据获取
+
+#### a. 请求方式
+
+GET  ${Host}/api/trace/query_by_mailno/{mailno}
+
+#### b. 参数说明
+
+###### 返回数据
+
+| Response              |         |                     |
+| --------------        | ------- | ------------------- |
+| code                  | int     |                     |
+| success               | boolean |                     |
+| data                  | array   | 返回数据             |
+| data.trace_id         | long    | 轨迹数据ID           |
+| data.type             | string  | 消息类型             |
+| data.mailno           | string  | 邮件号               |
+| data.event_id         | string  | 事件ID               |
+| data.orderno          | long    | 订单号               |
+| data.event_time       | string  | 事件时间              |
+| data.event_time_zone  | string  | 事件时区              |
+| data.event_status     | string  | 事件状态              |
+| data.event_country    | string  | 事件国家              |
+| data.event_city       | string  | 事件城市              |
+| data.deal_org_name    | string  | 处理机构名称           |
+| data.deal_org_en_name | string  | 处理机构英文名称        |
+| data.deal_org_phone   | string  | 处理机构联系方式        |
+| data.dest_city        | string  | 目的地城市             |
+| data.sender_city      | string  | 寄件城市               |
+| data.receiver_city    | string  | 收件城市               |
+| data.signer_name      | string  | 签收人名称              |
+| data.undelivery_cause | string  | 投递失败原因            |
+| data.create_time      | long    | 数据创建时间            |
+| data.status           | int     | 数据状态               |
+
+#### c. 请求示例
+```_
+GET ${Host}/api/trace/1111111111
+content-type: application/json
+channel: C100001
+nonce: e2dd305d79c2ebc8
+timestamp: 1582268384295
+sign: oOS98eZJI2KDzoOlfl7Je0XN4gAyrqNG
+```
+
+#### d. 返回示例
+```JSON
+{
+  "code": 0,
+  "success": true,
+  "data": [{
+    "id": 774110505139699712,
+    "channel": 100001,
+    "batchno": 101892,
+    "type": "I",
+    "mailno": "A1111111",
+    "orderno": null,
+    "event_time": "2020-11-06 22:13:00 333",
+    "event_time_zone": "+8",
+    "event_status": "O_111",
+    "event_country": "CN",
+    "event_city": null,
+    "deal_org_name": null,
+    "deal_org_en_name": null,
+    "deal_org_phone": null,
+    "dest_city": null,
+    "sender_city": null,
+    "receiver_city": null,
+    "signer_name": null,
+    "undelivery_cause": null,
+    "create_time": 1604632726703,
+    "status": 1
+  }]
+}
+```
+
+### 5. 邮政邮件面单获取
 
 #### a. 请求方式
 
