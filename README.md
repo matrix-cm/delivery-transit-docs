@@ -334,7 +334,7 @@ GET  ${Host}/api/trace/query_by_mailno/{mailno}
 
 #### c. 请求示例
 ```_
-GET ${Host}/api/trace/1111111111
+GET ${Host}/api/trace/query_by_mailno/AQ850000084CN
 content-type: application/json
 channel: C100001
 nonce: e2dd305d79c2ebc8
