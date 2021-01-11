@@ -155,11 +155,12 @@ POST  /api/trace/submit
 
 ###### 请求参数
 
-| Parameter        | Type   | Re  | Desc                            |
-| ---------------- | ------ | --- | ------------------------------- |
-| type             | String | *   | 消息类型：  I,U,D                 |
-| mailno           | String | *   | 邮件号                            |
-| event_time       | String | *   | 事件发生时间:  yyyy-MM-dd HH:mm:ss |
+| Parameter        | Type   | Re  | Desc                              |
+| ---------------- | ------ | --- | -------------------------------   |
+| type             | String | *   | 消息类型：  I,U,D                  |
+| mailno           | String | *   | 邮件号                             |
+| event_id         | String | -   | 事件ID, 为空时以系统填充ID作为事件ID |
+| event_time       | String | *   | 事件发生时间:  yyyy-MM-dd HH:mm:ss  |
 | event_time_zone  | String | *   | 时区：例如+8                       |
 | event_status     | String | *   | 事件状态                           |
 | event_country    | String | -   | 发生国家：国家名称，直接展示          |
@@ -172,6 +173,12 @@ POST  /api/trace/submit
 | receiver_city    | String | -   | 收件城市                           |
 | signer_name      | String | -   | 签收人名称                         |
 | undelivery_cause | String | -   | 投递失败原因                       |
+
+###### 注意事项
+
+邮政方数据排重条件mailno、event_id、event_time
+如需修改时间，请删除原有的消息，重新传一个新的
+如果修改其他内容，直接修改
 
 ###### 返回数据
 
@@ -230,6 +237,7 @@ GET  ${Host}/api/trace/{trace_id}
 | data.trace_id         | long    | 轨迹数据ID           |
 | data.type             | string  | 消息类型             |
 | data.mailno           | string  | 邮件号               |
+| data.event_id         | string  | 事件ID               |
 | data.orderno          | long    | 订单号               |
 | data.event_time       | string  | 事件时间              |
 | data.event_time_zone  | string  | 事件时区              |
